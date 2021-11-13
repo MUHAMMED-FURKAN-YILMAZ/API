@@ -1,10 +1,10 @@
-package com.techproed.day04;
+package com.techproed.MentoringQuestion;
 
 import io.restassured.response.Response;
 import org.junit.Test;
 import static io.restassured.RestAssured.given;
 
-public class MentoringSorusuCevap {
+public class MentoringQuestion01_Answer {
 
     @Test
     public void get01(){

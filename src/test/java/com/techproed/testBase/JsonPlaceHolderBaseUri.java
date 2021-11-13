@@ -14,4 +14,7 @@ public class JsonPlaceHolderBaseUri {
                 setBaseUri("https://jsonplaceholder.typicode.com").build();
     }
 
+
+
+
 }

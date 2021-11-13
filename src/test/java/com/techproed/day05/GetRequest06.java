@@ -1,12 +1,13 @@
 package com.techproed.day05;
 
+import com.techproed.testBase.JsonPlaceHolderBaseUri;
 import io.restassured.response.Response;
 import org.junit.Test;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 
-public class GetRequest06 {
+public class GetRequest06 extends JsonPlaceHolderBaseUri {
     //https://jsonplaceholder.typicode.com/todos/123 url'ine
     //   accept type'i "application/json" olan GET request'i yolladigimda
     //   gelen response’un
@@ -19,18 +20,24 @@ public class GetRequest06 {
 
     @Test
     public void  test(){
-        String url="https://jsonplaceholder.typicode.com/todos/123";
+       // String url="https://jsonplaceholder.typicode.com/todos/123";
+        spec01.pathParams("parametre1","todos",
+                "parametre2",123);
 
         Response response=given().
                 accept("application/json").
-                when().get(url);
+                spec(spec01).
+                when().
+                get("/{parametre1}/{parametre2}");
 
-        // burada kaldık
+        response.prettyPrint();
+
+
         response.then().assertThat().statusCode(200).
                 contentType("application/json").
                 header("Server","cloudflare").
                 body("userId",equalTo(7),
-                        "title",equalTo("esse et quis iste est earum aut impedit"),
+                     "title",equalTo("esse et quis iste est earum aut impedit"),
                         "completed",equalTo(false));
 
 

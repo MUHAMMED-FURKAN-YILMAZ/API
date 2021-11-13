@@ -1,4 +1,4 @@
-package com.techproed.day04;
+package com.techproed.MentoringQuestion;
 
 import io.restassured.response.Response;
 import org.junit.Assert;
@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import static io.restassured.RestAssured.given;
 
-public class MentoringSorusu {
+public class MentoringQuestion01 {
 
     //https://restful-booker.herokuapp.com/booking/10 url'ine bir GET request gonderdigimizde donen Response'un,
     //        status code'unun 200,
