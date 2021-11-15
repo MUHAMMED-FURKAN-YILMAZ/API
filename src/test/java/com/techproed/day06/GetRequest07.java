@@ -46,13 +46,12 @@ public class GetRequest07 extends HerokuAppTestBase {
         Assert.assertEquals("Sally",jsonPath.getString("firstname"));
         Assert.assertEquals("Wilson",jsonPath.getString("lastname"));
         Assert.assertEquals(753,jsonPath.getInt("totalprice"));
-        Assert.assertEquals(true,jsonPath.getBoolean("depositpaid"));
+
+        //Assert.assertEquals(true,jsonPath.getBoolean("depositpaid"));
+        Assert.assertTrue(jsonPath.getBoolean("depositpaid"));
+
         Assert.assertEquals("2020-10-31",jsonPath.getString("bookingdates.checkin"));
         Assert.assertEquals("2021-06-26",jsonPath.getString("bookingdates.checkout"));
 
-
-
-
     }
-
 }

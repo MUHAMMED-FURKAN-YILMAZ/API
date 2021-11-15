@@ -1,12 +1,18 @@
 package com.techproed.day06;
 
 import com.techproed.testBase.DummyTestBase;
+import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
+import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.hasItems;
 
 public class GetRequest09 extends DummyTestBase {
 
@@ -38,10 +44,16 @@ public class GetRequest09 extends DummyTestBase {
         Assert.assertEquals(372000,jsonPath.getInt("data[5].employee_salary"));
         Assert.assertEquals(24,jsonPath.getList("data.employee_name").size());
         Assert.assertTrue(jsonPath.getList("data.employee_name").contains("Rhona Davidson"));
-        Assert.assertTrue(jsonPath.getList("data.employee_age").contains(21) ||
-                                   jsonPath.getList("data.employee_age").contains(23) ||
-                                   jsonPath.getList("data.employee_age").contains(61));
 
+        //*** 1. yol****
+        List<Integer> arananYaslar= Arrays.asList(21,23,61);
+        Assert.assertTrue(jsonPath.getList("data.employee_age").containsAll(arananYaslar));
+
+        //*** 2. yol****
+        //response.then().assertThat().body("data.employee_age", hasItems(21 , 23 , 61));
+
+        //*** 3. yol lambda ***
+        Assert.assertTrue(jsonPath.getList("data.employee_age").stream().anyMatch(t-> t.equals(21) || t.equals(61) || t.equals(23)));
     }
 
 
