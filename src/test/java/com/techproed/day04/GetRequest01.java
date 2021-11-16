@@ -19,13 +19,13 @@ public class GetRequest01 {
 
     @Test
     public void  test() {
-        //1- Api testi yaparken ilk olarak url (endpoint) belirlenmeli
+        //1- Api testi yaparken ilk olarak url (endpoint) belirlenmeli // 1.Step: Set the URL
         String url = "https://restful-booker.herokuapp.com/booking/3";
 
-        //2- Beklenen sonuc nedir(expected result) olusturulur
+        //2- Beklenen sonuc nedir(expected result) olusturulur // 2.Step: Set the expected data (Start with inner Json)
             //--bu case'de benden body dogrulamasi istenmedigi icin simdilik beklenen sonuc olusturmuyoruz
 
-        //3- Request gonder
+        //3- Request gonder  // 3.Step: Send the request and get the response
         Response response= given().
                 accept(ContentType.JSON).//accept("application/json") kullanilanilir.
                 when().
@@ -33,7 +33,7 @@ public class GetRequest01 {
 
         response.prettyPrint();
 
-        // 4- Actual result olustur
+        // 4- Actual result olustur         //  4.Step: Do the assertion
             //--response body ile ilgili islem yapmayacagimiz icin simdi olusturmayacagiz
 
         // 5- Assertion(dogrulama) yap
