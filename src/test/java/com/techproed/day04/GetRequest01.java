@@ -33,10 +33,10 @@ public class GetRequest01 {
 
         response.prettyPrint();
 
-        // 4- Actual result olustur         //  4.Step: Do the assertion
+        // 4- Actual result olustur
             //--response body ile ilgili islem yapmayacagimiz icin simdi olusturmayacagiz
 
-        // 5- Assertion(dogrulama) yap
+        // 5- Assertion(dogrulama) yap  //  4.Step: Do the assertion
         System.out.println("Status code : "+response.getStatusCode());//response'dan gelen status code'u verir
         System.out.println("Content Type : "+response.getContentType());//response'dan gelen content Type'i verir
         System.out.println("Status line : "+response.getStatusLine());//response'dan gelen status line'i verir
