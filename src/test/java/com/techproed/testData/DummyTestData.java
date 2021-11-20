@@ -8,10 +8,15 @@ public class DummyTestData {
 
     /*
         http://dummy.restapiexample.com/api/v1/employees url ine bir istek gönderildiğinde
+
     Status kodun 200 olduğunu,
+
     5. Çalışan isminin "Airi Satou" olduğunu ,
+
     çalışan sayısının 24 olduğunu,
+
    Sondan 2. çalışanın maaşının 106450 olduğunu
+
     40,21 ve 19 yaslarında çalışanlar olup olmadığını
 
     11. Çalışan bilgilerinin
@@ -45,8 +50,28 @@ public class DummyTestData {
         expectedData.put("onBirinciCalisan",onBirinci);
 
         return expectedData;
-
-
     }
+
+
+    public HashMap<String, Integer> setupTestData2(){
+
+        //http://dummy.restapiexample.com/api/v1/employees url ine bir istek gönderildiğinde
+        //Status kodun 200 olduğunu,
+        //En yüksek maaşın 725000 olduğunu,
+        //En küçük yaşın 19 olduğunu,
+        //İkinci en yüksek maaşın 675000
+        //olduğunu test edin.
+
+        HashMap<String ,Integer> expectedData=new HashMap<>();
+        expectedData.put("statusCode",200);
+        expectedData.put("enYuksekMaas",725000);
+        expectedData.put("enKucukYas",19);
+        expectedData.put("ikinciEnYuksekMaas",675000);
+
+
+        return expectedData;
+    }
+
+
 
 }

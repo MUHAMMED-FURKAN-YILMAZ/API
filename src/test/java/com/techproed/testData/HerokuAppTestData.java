@@ -22,6 +22,7 @@ public class HerokuAppTestData {
         bookingdates.put("checkin","2016-07-28");
         bookingdates.put("checkout","2020-03-26");
 
+
         HashMap<String,Object> expectedData=new HashMap<>();
 
         expectedData.put("firstname","Sally");
