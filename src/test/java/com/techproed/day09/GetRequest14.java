@@ -43,6 +43,8 @@ public class GetRequest14 extends DummyTestBase {
        // System.out.println(actualDataMap);
 
 
+
+
         //Status kodun 200 olduğunu,
         Assert.assertEquals(expectedDataMap.get("statusCode"),(Integer) response.statusCode());
 

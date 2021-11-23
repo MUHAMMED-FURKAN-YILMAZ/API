@@ -1,12 +1,20 @@
 package com.techproed.day10;
 
+import com.google.gson.Gson;
 import com.techproed.testBase.HerokuAppTestBase;
 import com.techproed.testData.HerokuAppTestData;
+import io.restassured.http.ContentType;
+import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.json.JSONObject;
 import org.junit.Test;
 
+
+import java.util.HashMap;
+import java.util.Map;
+
 import static io.restassured.RestAssured.given;
+import static org.junit.Assert.assertEquals;
 
 public class PostRequest02 extends HerokuAppTestBase {
 
@@ -38,17 +46,69 @@ public class PostRequest02 extends HerokuAppTestBase {
 
     @Test
     public void test(){
+        //url
+        spec02.pathParam("parametre1","booking");
 
-        spec02.pathParam("first","booking");
+        //requestBody   ve expected Data aynı olduğu için tek bir JSONObject kullanılması yeterlidir.
+        HerokuAppTestData herokuAppTestData=new HerokuAppTestData() ;
+        JSONObject expectedRequestData=herokuAppTestData.setUpTestAndRequestData();
+        System.out.println(expectedRequestData);
 
-        HerokuAppTestData herokuAppTestData=new HerokuAppTestData();
-        JSONObject expectedAndRequestData= herokuAppTestData.setUpTestAndRequestData();
+        //request gönder
+        Response response=given().
+                contentType(ContentType.JSON).
+                spec(spec02).
+                auth().basic("admin","password123").
+                body(expectedRequestData.toString()).
+                when().
+                post("/{parametre1}");
+       // response.prettyPrint();
 
-        System.out.println(expectedAndRequestData.toString());
+        //de serialization yontemi
+        HashMap<String ,Object> actualDataMap=response.as(HashMap.class);
 
-        Response response=
-                given().accept("application/json").spec(spec02).
-                        body(expectedAndRequestData).post("/{first}");
+        System.out.println(actualDataMap);
+
+        assertEquals(expectedRequestData.getString("firstname"),
+                ((Map)actualDataMap.get("booking")).get("firstname"));
+
+        assertEquals(expectedRequestData.getString("lastname"),
+                ((Map)actualDataMap.get("booking")).get("lastname"));
+
+        assertEquals(expectedRequestData.getInt("totalprice"),
+                ((Map)actualDataMap.get("booking")).get("totalprice"));
+
+        assertEquals(expectedRequestData.getBoolean("depositpaid"),
+                ((Map<?, ?>) actualDataMap.get("booking")).get("depositpaid"));
+
+        assertEquals(expectedRequestData.getJSONObject("bookingdates").getString("checkin"),
+                ((Map)((Map<?, ?>) actualDataMap.get("booking")).get("bookingdates")).get("checkin"));
+
+        assertEquals(expectedRequestData.getJSONObject("bookingdates").getString("checkout"),
+                ((Map)((Map<?, ?>) actualDataMap.get("booking")).get("bookingdates")).get("checkout"));
+
+
+        //JsonPath yontemi
+
+        JsonPath jsonPath=response.jsonPath();
+
+        assertEquals(expectedRequestData.getString("firstname"),
+                jsonPath.get("booking.firstname"));
+
+        assertEquals(expectedRequestData.getString("lastname"),
+                jsonPath.get("booking.lastname"));
+
+        assertEquals(expectedRequestData.get("totalprice"),
+                jsonPath.getInt("booking.totalprice"));
+
+        assertEquals(expectedRequestData.getBoolean("depositpaid"),
+                jsonPath.getBoolean("booking.depositpaid"));
+
+        assertEquals(expectedRequestData.getJSONObject("bookingdates").getString("checkin"),
+                jsonPath.getString("booking.bookingdates.checkin"));
+
+        assertEquals(expectedRequestData.getJSONObject("bookingdates").getString("checkout"),
+                jsonPath.getString("booking.bookingdates.checkout"));
 
 
     }
