@@ -12,7 +12,7 @@ import org.junit.Test;
 import static io.restassured.RestAssured.given;
 import static org.junit.Assert.assertEquals;
 
-public class putRequest01 extends JsonPlaceHolderBaseUri {
+public class PutRequest01 extends JsonPlaceHolderBaseUri {
 
     /*
     https://jsonplaceholder.typicode.com/todos/198 URL ine aşağıdaki body gönerdiğimde

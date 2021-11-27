@@ -1,5 +1,7 @@
 package com.techproed.testData;
 
+import org.json.JSONObject;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -103,7 +105,22 @@ public class DummyTestData {
     }
 
 
+    /*
+    {
+ "status": "success",
+ "data": "2",
+ "message": "Successfully! Record has been deleted"
+}
+     */
+public JSONObject setUpDeleteExpectedData(){
+    JSONObject ExpectedData=new JSONObject();
 
+    ExpectedData.put("status","success");
+    ExpectedData.put("data","2");
+    ExpectedData.put("message","Successfully! Record has been deleted");
+
+    return ExpectedData;
+}
 
 
 }
