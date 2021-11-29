@@ -1,4 +1,4 @@
-package com.techproed.pojos;
+package com.techproed.pojos.herokuPojo;
 
 public class BookingPojo {
     /*

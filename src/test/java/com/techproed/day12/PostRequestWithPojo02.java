@@ -1,8 +1,8 @@
 package com.techproed.day12;
 
-import com.techproed.pojos.BookingDatesPojo;
-import com.techproed.pojos.BookingPojo;
-import com.techproed.pojos.BookingResponsePojo;
+import com.techproed.pojos.herokuPojo.BookingDatesPojo;
+import com.techproed.pojos.herokuPojo.BookingPojo;
+import com.techproed.pojos.herokuPojo.BookingResponsePojo;
 import com.techproed.testBase.HerokuAppTestBase;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -43,13 +43,13 @@ Status kodun 200 ve dönen response ‘un
 
     @Test
     public void test(){
-        spec02.pathParams("first","booking");
+        spec02.pathParam("first","booking");
 
         BookingDatesPojo bookingDates=new BookingDatesPojo("2020-09-09","2020-09-21");
         BookingPojo requestData=new BookingPojo("Selim","Ak",15000,true,bookingDates);
-        BookingResponsePojo expectedData=new BookingResponsePojo(14,requestData);
+
         System.out.println("requestData = " + requestData);
-        System.out.println("expectedData = " + expectedData);
+
 
         Response response=given().contentType(ContentType.JSON).
                 spec(spec02).auth().basic("admin","password123").
@@ -61,13 +61,16 @@ Status kodun 200 ve dönen response ‘un
 
 
         assertEquals(200,response.statusCode());
-        assertEquals(expectedData.getBookingid(),actualData.getBookingid());
-        assertEquals(expectedData.getBooking().getFirstname(),actualData.getBooking().getFirstname());
-        assertEquals(expectedData.getBooking().getLastname(),actualData.getBooking().getLastname());
-        assertEquals(expectedData.getBooking().getTotalprice(),actualData.getBooking().getTotalprice());
-        assertEquals(expectedData.getBooking().isDepositpaid(),actualData.getBooking().isDepositpaid());
-        assertEquals(expectedData.getBooking().getBookingdates().getCheckin(),actualData.getBooking().getBookingdates().getCheckin());
-        assertEquals(expectedData.getBooking().getBookingdates().getCheckout(),actualData.getBooking().getBookingdates().getCheckout());
+
+        assertEquals(requestData.getFirstname(),actualData.getBooking().getFirstname());
+        assertEquals(requestData.getLastname(),actualData.getBooking().getLastname());
+        assertEquals(requestData.getTotalprice(),actualData.getBooking().getTotalprice());
+        assertEquals(requestData.isDepositpaid(),actualData.getBooking().isDepositpaid());
+
+        assertEquals(requestData.getBookingdates().getCheckin(),
+                actualData.getBooking().getBookingdates().getCheckin());
+        assertEquals(requestData.getBookingdates().getCheckout(),
+                actualData.getBooking().getBookingdates().getCheckout());
 
     }
 
