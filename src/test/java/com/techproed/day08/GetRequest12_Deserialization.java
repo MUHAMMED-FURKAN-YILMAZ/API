@@ -46,7 +46,7 @@ public class GetRequest12_Deserialization extends HerokuAppTestBase {
                 spec(spec02).when().
                 get("/{first}/{second}");
 
-        // 4.Step: Get the expected data
+        // 4.Step: Get the actual data
         HashMap<String,Object> actualTestData=response.as(HashMap.class);
 
         System.out.println(actualTestData);
