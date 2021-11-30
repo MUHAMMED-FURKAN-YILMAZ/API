@@ -21,11 +21,16 @@ public class GetRequest06 extends JsonPlaceHolderBaseUri {
     @Test
     public void  test(){
        // String url="https://jsonplaceholder.typicode.com/todos/123";
-        spec01.pathParams("parametre1","todos",
-                "parametre2",123);
+        spec01.pathParams("parametre1","todos", "parametre2",123);
+        /*
+        spec01.pathParams("parametre1","todos", "parametre2",123).
+                queryParam("token","");
+                calistigimiz yerin swagger dokumaninda
+        api eger authorization'u queryParam ile istiyorsa buradan ekleyebiliriz
+         */
 
         Response response=given().
-                accept("application/json").
+                accept("application/json").//header("token","").-> yada buradan gondeririz
                 spec(spec01).
                 when().
                 get("/{parametre1}/{parametre2}");
